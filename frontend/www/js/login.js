@@ -3,7 +3,7 @@ const formLogin = document.querySelector('form')
 formLogin.addEventListener('submit', async e => {
   e.preventDefault()
 
-  const response = await fetch('/api/sessions/login', {
+  const response = await fetch('http://localhost:8080/api/sessions/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -12,9 +12,9 @@ formLogin.addEventListener('submit', async e => {
     body: new URLSearchParams(new FormData(formLogin))
   })
 
-  console.log(response)
   if (response.status === 201) {
-    window.location.href = '/users/profile'
+    console.log(await response.json())
+    //window.location.href = '/profile.html'
   } else {
     const error = await response.json()
     alert(error.message)

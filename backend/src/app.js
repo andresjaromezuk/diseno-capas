@@ -1,7 +1,6 @@
 import express, { json, urlencoded } from 'express'
 import methodOverride from 'method-override' 
 import {apiRouter} from './router/api/apiRouter.js'
-import {webRouter} from './router/web/webRouter.js'
 import {engine} from 'express-handlebars'
 import { sessions } from './middleware/sessions.js'
 import { authenticate } from './middleware/authentication.js'
@@ -9,7 +8,7 @@ import { cookies } from './middleware/cookies.js'
 import { connectDB } from './database/mongodb.js'
 import path from 'path'
 import __dirname from './util.js'
-
+import cors from 'cors'
 
 //MongoDB
 await connectDB()
@@ -17,7 +16,7 @@ await connectDB()
 //Express
 import {PORT} from './config/server.config.js'
 const app = express()
-
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 
 //Middlewares 
 app.use('/static', express.static(path.join(__dirname, '../static')))
@@ -39,4 +38,4 @@ const server = app.listen(PORT, ()=>{console.log(`Servidor escuchando en puerto 
 
 //Rutas
 app.use('/api', apiRouter)
-app.use('/', webRouter)
+

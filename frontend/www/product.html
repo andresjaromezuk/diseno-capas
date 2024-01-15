@@ -1,18 +1,33 @@
-<div>
-    <h1> {{product.title}}</h1>
-    <button>AGREGAR AL CARRITO</button>
-    <input type="text" value="{{product._id}}" hidden>
-    <p>Code: {{product.code}}</p>
-    <p>Descripción: {{product.description}}</p>
-    <p>Stock:{{product.stock}}</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del producto</title>
+</head>
+
+<body>
     <div>
-      {{#if product.thumbnail.length}}
-        {{#each product.thumbnail}}
-          <img src="{{this}}" alt="">
-        {{/each}}
-      {{/if}}
-    </div> 
-</div>
+        <h1> {{product.title}}</h1>
+        <button>AGREGAR AL CARRITO</button>
+        <input type="text" value="{{product._id}}" hidden>
+        <p>Code: {{product.code}}</p>
+        <p>Descripción: {{product.description}}</p>
+        <p>Stock:{{product.stock}}</p>
+        <div>
+        {{#if product.thumbnail.length}}
+            {{#each product.thumbnail}}
+            <img src="{{this}}" alt="">
+            {{/each}}
+        {{/if}}
+        </div> 
+    </div>
+</body>
+
+</html>
+
 
 <script>
     document.querySelector('button').addEventListener('click', async (e) =>{

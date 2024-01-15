@@ -5,12 +5,12 @@ const age = document.querySelector('#age')
 const button = document.querySelector('button')
 
 window.addEventListener('load', async () => {
-    const response_json = await fetch('/api/users/profile')
+    const response_json = await fetch('http://localhost:8080/api/users/profile')
     console.log(response_json)
-    if (response_json.status !== 200) {
-        alert('Debes iniciar sesión')
-        return (window.location.href = '/sessions/login')
-    }
+    // if (response_json.status !== 200) {
+    //     alert('Debes iniciar sesión')
+    //     return (window.location.href = '/login.html')
+    // }
    
     const response = await response_json.json()
 

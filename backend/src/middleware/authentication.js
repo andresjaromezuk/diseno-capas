@@ -7,7 +7,7 @@ import {githubClientId, githubClientSecret, githubCallbackUrl} from '../config/g
 import {JWT_PRIVATE_KEY} from '../config/auth.config.js'
 import {encrypt} from "../utils/encryptor.js"
 
-const COOKIE_OPTS = { signed: true, maxAge: 1000 * 60 * 60, httpOnly: true }
+const COOKIE_OPTS = { signed: true, maxAge: 1000 * 60 * 60,  domain: 'localhost', httpOnly: true }
 
 passport.use('login', new LocalStrategy({
   usernameField: 'email'
