@@ -51,7 +51,7 @@ window.addEventListener('load', async () => {
 function showAllProducts(payload){
     let product_id
     payload.docs.forEach(element => {
-        productTitle.innerHTML = `<h3> ${element.title} </h3>`
+        productTitle.innerHTML = `<h3><a href="#"> ${element.title} </a></h3>`
         showProducts.innerHTML = `
         <ul>
             <li> Descripción: ${element.description}</li>
