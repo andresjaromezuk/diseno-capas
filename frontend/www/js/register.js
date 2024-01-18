@@ -3,7 +3,7 @@ const formRegister = document.querySelector('form')
 formRegister.addEventListener('submit', async e => {
     e.preventDefault()
   
-    const response = await fetch('/api/users/register', {
+    const response = await fetch('http://localhost:8080/api/users/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -13,7 +13,9 @@ formRegister.addEventListener('submit', async e => {
     })
     console.log(response)
     if (response.status === 201) {
-      window.location.href = '/users/profile'
+      const {payload} = await response.json()
+      document.cookie = `Authorization=${payload}; expires=Thu, 19 Dec 2024 12:00:00 UTC; path=/`
+      window.location.href = '/profile.html'
     } else {
       const error = await response.json()
       alert(error.message)

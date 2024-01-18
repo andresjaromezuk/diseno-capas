@@ -35,10 +35,11 @@ passport.use('register', new LocalStrategy({
 passport.use('jwt', new JwtStrategy({
   jwtFromRequest: ExtractJwt.fromExtractors([function (req) {
     let token = null
-    if (req?.signedCookies) {
-      token = req.signedCookies['authorization']
+    let header = req.get('Authorization').split("Bearer")
+    if (header.length > 1) {
+      token = req.get('Authorization').split("Bearer")[1].trim()
     }
-    
+    console.log(`\n\n\n\n token ${token} \n\n\n`)
     if(!token){
       throw new Error('Debes iniciar sesión')
     }
@@ -94,7 +95,7 @@ export async function appendJwt(req, res, next){
 }
 
 export async function removeJwtFromCookies(req, res, next) {
-  const response = res.clearCookie('authorization', COOKIE_OPTS)
+  //const response = res.clearCookie('authorization', COOKIE_OPTS)
   next()
 }
 

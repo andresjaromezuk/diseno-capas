@@ -3,7 +3,7 @@ import { dbUser } from '../dao/models/mongoose/user.mongoose.js'
 
 export const userController = {
     register:  function (req, res, next) {
-        res['successfullPost'](req.user)
+        res['successfullPost'](req.jwt)
     },
 
     profile: async (req, res, next)=> {

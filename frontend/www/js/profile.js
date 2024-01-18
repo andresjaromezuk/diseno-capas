@@ -5,8 +5,12 @@ const age = document.querySelector('#age')
 const button = document.querySelector('button')
 
 window.addEventListener('load', async () => {
-    const response_json = await fetch('http://localhost:8080/api/users/profile')
-    console.log(response_json)
+    console.log(document.cookie.split("=")[1])
+    const response_json = await fetch('http://localhost:8080/api/users/profile',{ 
+    headers: {
+        'Authorization': `Bearer ${document.cookie.split("=")[1]}`
+      }})
+    console.log(await response_json)
     // if (response_json.status !== 200) {
     //     alert('Debes iniciar sesión')
     //     return (window.location.href = '/login.html')
@@ -20,12 +24,15 @@ window.addEventListener('load', async () => {
     age.innerHTML = `<p>${response.payload.age}</p>` 
     
     button.addEventListener('click', async()=>{
-        const response_json = await fetch('/api/sessions/logout',  {
+        const response_json = await fetch('http://localhost:8080/api/sessions/logout',  {
             method: 'DELETE'
         })
 
+        console.log(await response_json.json())
+
         if(response_json.status === 200){
-            window.location.href = '/sessions/login'
+            document.cookie = "Authorization=; expires=Thu, 19 Dec 2024 12:00:00 UTC; path=/"
+            window.location.href = '/login.html'
         }
     })
 })
