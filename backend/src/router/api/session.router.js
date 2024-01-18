@@ -2,6 +2,7 @@ import { Router } from 'express'
 import {apiUserLogged} from '../../middleware/authorization.js'
 import {appendJwtAsCookie, removeJwtFromCookies} from '../../middleware/authentication.js'
 import passport from 'passport'
+import { sessionController } from '../../controllers/session.controller.js'
 
 export const sessionRouter = Router()
 
@@ -12,9 +13,7 @@ sessionRouter.post('/login',
     session:false
   }),
   appendJwtAsCookie,
-  function(req, res, next){
-    res['successfullPost'](req.user)
-  }
+  sessionController.login
 )
 
 sessionRouter.get('/current', 
@@ -23,12 +22,10 @@ passport.authenticate('jwt',{
   session:false
 }),
 apiUserLogged,
-async (req, res, next) =>{
-  res['successfullGet'](req.user)
-})
+sessionController.current
+)
 
 sessionRouter.delete('/logout', 
   removeJwtFromCookies,
-  (req, res) => {
-    res['successfullLogout']()
-  })
+  sessionController.delete
+  )

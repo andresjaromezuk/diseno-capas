@@ -1,1 +1,3 @@
-export const MONGODB_CNX_STR = 'mongodb+srv://andresjaromezuk:2cOkKERq5yG3Viln@ecommerce.vuylwk0.mongodb.net/'
+import {dotenv_config} from './index.config.js'
+
+export const MONGODB_CNX_STR = process.env.MONGODB_CNX_STR
