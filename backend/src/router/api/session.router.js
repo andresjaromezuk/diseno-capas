@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import {apiUserLogged} from '../../middleware/authorization.js'
-import {appendJwtAsCookie, removeJwtFromCookies} from '../../middleware/authentication.js'
+import {appendJwt, removeJwtFromCookies} from '../../middleware/authentication.js'
 import passport from 'passport'
 import { sessionController } from '../../controllers/session.controller.js'
 
@@ -12,7 +12,7 @@ sessionRouter.post('/login',
     failWithError: true,
     session:false
   }),
-  appendJwtAsCookie,
+  appendJwt,
   sessionController.login
 )
 

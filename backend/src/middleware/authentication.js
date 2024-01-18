@@ -82,10 +82,11 @@ passport.use('github', new GithubStrategy({
 
 }))
 
-export async function appendJwtAsCookie(req, res, next){
+export async function appendJwt(req, res, next){
   try {
     const jwt = await encrypt(req.user)
-    res.cookie('authorization', jwt, COOKIE_OPTS)
+    //res.cookie('authorization', jwt, COOKIE_OPTS)
+    req.jwt = jwt
     next()
   } catch (error) {
     next(error)

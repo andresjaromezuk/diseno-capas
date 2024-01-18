@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { userController } from '../../controllers/user.controller.js'
-import {appendJwtAsCookie} from '../../middleware/authentication.js'
+import {appendJwt} from '../../middleware/authentication.js'
 import {apiUserLogged, apiAdminAccess} from '../../middleware/authorization.js'
 import passport from 'passport'
 import { dbUser } from '../../dao/models/mongoose/user.mongoose.js'
@@ -12,7 +12,7 @@ userRouter.post('/register',
     failWithError: true,
     session:false
   }),
-  appendJwtAsCookie,
+  appendJwt,
   userController.register
 )
 

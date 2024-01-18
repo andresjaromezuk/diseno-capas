@@ -13,8 +13,9 @@ formLogin.addEventListener('submit', async e => {
   })
 
   if (response.status === 201) {
-    console.log(await response.json())
-    //window.location.href = '/profile.html'
+    
+
+    window.location.href = '/profile.html'
   } else {
     const error = await response.json()
     alert(error.message)

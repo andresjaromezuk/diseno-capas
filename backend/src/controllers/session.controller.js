@@ -1,7 +1,7 @@
 
 export const sessionController= {
     login:  (req, res, next) => {
-        res['successfullPost'](req.user)
+        res['successfullPost'](req.jwt)
     },
 
     current: async (req, res, next) =>{
